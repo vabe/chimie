@@ -1,0 +1,15 @@
+{
+	"manifest_version": 3,
+	"name": "Chimie",
+	"version": "0.1.0",
+	"description": "Copy random molecule data from trusted sources.",
+	"icons": {
+		"128": "favicon.png"
+	},
+	"action": {
+		"default_title": "Chimie",
+		"default_popup": "index.html",
+		"default_icon": "favicon.png"
+	},
+	"permissions": ["tabs", "storage", "favicon"]
+}
