@@ -15,7 +15,7 @@
 		type Molecule,
 		type MoleculeStorage
 	} from '$lib/utils';
-	import { representationMapper, representationTypes } from '$lib/constants';
+	import { TRANSITION_DURATION, representationMapper, representationTypes } from '$lib/constants';
 
 	import Spinner from '$lib/components/spinner.svelte';
 	import CopyButton from '$lib/components/copy-button.svelte';
@@ -102,7 +102,10 @@
 	</Tabs.List>
 	<Tabs.Content value="Copy">
 		{#if activeTab === 'Copy'}
-			<form on:submit|preventDefault={handleFormSubmit} transition:fly={{ x: 10, duration: 350 }}>
+			<form
+				on:submit|preventDefault={handleFormSubmit}
+				transition:fly={{ x: 10, duration: TRANSITION_DURATION }}
+			>
 				<Card.Root class="rounded-none shadow-none border-none">
 					<Card.Header class="p-4 py-2">
 						<Button
@@ -176,14 +179,14 @@
 		{#if activeTab === 'History'}
 			<div
 				class="p-4 flex flex-col gap-2 pt-2 pr-0 pb-0"
-				transition:fly={{ x: -10, duration: 350 }}
+				transition:fly={{ x: -10, duration: TRANSITION_DURATION }}
 			>
 				<ScrollArea class="h-[230px] pr-4">
 					<div class="flex flex-col gap-2">
 						{#if typeof moleculeHistory === 'undefined' || moleculeHistory.length === 0}
 							<div
 								class="flex items-center justify-center h-[230px] bg-gray-100 rounded-md w-full"
-								transition:fade={{ duration: 350 }}
+								transition:fade={{ duration: TRANSITION_DURATION }}
 							>
 								<span class="text-muted-foreground">No history to display</span>
 							</div>

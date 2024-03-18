@@ -14,4 +14,6 @@ export const moleculeToSVGOptions = {
 	suppressChiralText: true,
 	suppressCIPParity: true,
 	suppressESR: true
-};
+} as const;
+
+export const TRANSITION_DURATION = 350;

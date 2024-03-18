@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import Button from './ui/button/button.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
-	import { crossfade, fade, fly, slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
+	import { TRANSITION_DURATION } from '$lib/constants';
 
 	let timeout: number;
 	let isDisabled = false;
@@ -36,7 +37,10 @@
 			{size}
 		>
 			{#if isDisabled}
-				<span class={size === 'icon' ? 'w-8' : ''} in:fly={{ y: 10, duration: 300 }}>
+				<span
+					class={size === 'icon' ? 'w-8' : ''}
+					in:fly={{ y: 10, duration: TRANSITION_DURATION }}
+				>
 					{#if size === 'icon'}
 						✅
 					{:else}
@@ -44,7 +48,10 @@
 					{/if}
 				</span>
 			{:else}
-				<span in:fly={{ y: -10, duration: 300 }} class={size === 'icon' ? 'w-8' : ''}>
+				<span
+					in:fly={{ y: -10, duration: TRANSITION_DURATION }}
+					class={size === 'icon' ? 'w-8' : ''}
+				>
 					<slot />
 				</span>
 			{/if}
