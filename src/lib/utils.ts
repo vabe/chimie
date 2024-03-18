@@ -6,9 +6,10 @@ import {
 	representationTypes,
 	type RepresentationType,
 	representationMapper,
-	basePath
+	basePath,
+	moleculeToSVGOptions
 } from './constants';
-import { Molecule as MoleculeService } from 'openchemlib/minimal';
+import { Molecule as MoleculeService, type IMoleculeToSVGOptions } from 'openchemlib/minimal';
 
 export type Molecule = Record<RepresentationType, string>;
 export type MoleculeStorage = Molecule[];
@@ -61,8 +62,13 @@ export function getUrlFromId(id: number) {
 	return `${basePath}/cid/${id}/property/${representations},Complexity/JSON`;
 }
 
-export function getSVGFromSmiles(smiles: string, width = 250, height = 128) {
-	return MoleculeService.fromSmiles(smiles).toSVG(width, height);
+export function getSVGFromSmiles(
+	smiles: string,
+	width = 250,
+	height = 128,
+	options: IMoleculeToSVGOptions = moleculeToSVGOptions
+) {
+	return MoleculeService.fromSmiles(smiles).toSVG(width, height, undefined, options);
 }
 
 export async function copyToClipboard(molecule: Molecule, representation: RepresentationType) {

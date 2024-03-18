@@ -9,3 +9,9 @@ export const representationMapper = {
 	inchiKey: 'InChIKey',
 	molecularFormula: 'MolecularFormula'
 } as const;
+
+export const moleculeToSVGOptions = {
+	suppressChiralText: true,
+	suppressCIPParity: true,
+	suppressESR: true
+};
