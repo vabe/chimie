@@ -10,37 +10,35 @@
 		copyToClipboard,
 		getRandomMoleculeFromApi,
 		getSVGFromSmiles,
-		parseResponseToMolecule
+		parseResponseToMolecule,
+		type Molecule,
+		type MoleculeStorage
 	} from '$lib/utils';
-	import {
-		representationMapper,
-		representationTypes,
-		type RepresentationType,
-	} from '$lib/constants';
+	import { representationMapper, representationTypes } from '$lib/constants';
 
 	import Spinner from '$lib/components/spinner.svelte';
 	import CopyButton from '$lib/components/copy-button.svelte';
 	import MoleculeHistoryItem from '$lib/components/molecule-history-item.svelte';
 	import Footer from '$lib/components/footer.svelte';
+	import { StorageHandler } from '$lib/storage-handler';
 
 	let isLoading: boolean = false;
 	let isOnline: boolean = true;
-	let selectedMolecule: Record<RepresentationType, string>;
-	let moleculeHistory: Record<RepresentationType, string>[];
+	let selectedMolecule: Molecule;
+	let moleculeHistory: MoleculeStorage;
+	let storageHandler: StorageHandler<MoleculeStorage>;
 
 	$: if (typeof chrome !== 'undefined') {
 		if (typeof moleculeHistory !== 'undefined') {
-			chrome.storage.local.set({ molecules: moleculeHistory });
+			storageHandler.update('molecules', moleculeHistory);
 		}
 	}
 
 	onMount(async () => {
-		moleculeHistory = ((await chrome.storage.local.get('molecules')) as MoleculeStorage).molecules;
+		const { StorageHandler } = await import('$lib/storage-handler');
+		storageHandler = new StorageHandler<MoleculeStorage>('chrome');
+		moleculeHistory = await storageHandler.get('molecules');
 	});
-
-	type MoleculeStorage = {
-		molecules: Record<RepresentationType, string>[];
-	};
 
 	async function getMolecule() {
 		const molecule = await getRandomMoleculeFromApi();
@@ -69,8 +67,8 @@
 
 		isLoading = false;
 		selectedMolecule = molecule;
-		
-    moleculeHistory = await saveMolecule(selectedMolecule);
+
+		moleculeHistory = await saveMolecule(selectedMolecule);
 	}
 
 	function handleClearHistory() {
@@ -79,14 +77,15 @@
 		moleculeHistory = moleculeHistory;
 	}
 
-	async function saveMolecule(molecule: Record<RepresentationType, string>) {
-		const currentHistory = (await chrome.storage.local.get('molecules')) as MoleculeStorage;
+	async function saveMolecule(molecule: Molecule) {
+		const currentHistory = await storageHandler.get('molecules');
+		console.log(currentHistory);
 
-		if (currentHistory.molecules.length === 20) {
-			currentHistory.molecules.pop();
+		if (currentHistory.length === 20) {
+			currentHistory.pop();
 		}
 
-		return [molecule, ...currentHistory.molecules];
+		return [molecule, ...currentHistory];
 	}
 </script>
 

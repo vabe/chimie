@@ -10,8 +10,12 @@ export class StorageHandler<T> {
 		}
 	}
 
-	get(key: string) {
-		return this.storage?.get(key) as T;
+	async get(key: string) {
+		const value = await this.storage?.get(key);
+		if (typeof value === 'undefined') {
+			return undefined;
+		}
+		return value[key];
 	}
 
 	update(key: string, value: T) {

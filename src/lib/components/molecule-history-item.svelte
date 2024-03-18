@@ -19,6 +19,7 @@
 					onClick={() => copyToClipboard(molecule, representation)}
 					disabled={false}
 					tooltip={`Copy ${representationMapper[representation]}`}
+					size="icon"
 				>
 					{representationMapper[representation].at(0)}
 				</CopyButton>

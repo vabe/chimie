@@ -8,9 +8,13 @@ import {
 	representationMapper,
 	basePath
 } from './constants';
-import { Molecule } from 'openchemlib/minimal';
+import { Molecule as MoleculeService } from 'openchemlib/minimal';
+
+export type Molecule = Record<RepresentationType, string>;
+export type MoleculeStorage = Molecule[];
 
 export type PubChemCompound = {
+	MolecularFormula: string;
 	CanonicalSMILES: string;
 	IsomericSMILES: string;
 	InChI: string;
@@ -25,9 +29,9 @@ export type PubChemResponse = {
 };
 
 export async function getRandomMoleculeFromApi() {
-    const randomId = getRandomInt(1, 2_000_000);
-    const moleculeResponse = await fetch(getUrlFromId(randomId));
-    return (await moleculeResponse.json()) as PubChemResponse;
+	const randomId = getRandomInt(1, 2_000_000);
+	const moleculeResponse = await fetch(getUrlFromId(randomId));
+	return (await moleculeResponse.json()) as PubChemResponse;
 }
 
 export function getAllSupportedRepresentations() {
@@ -48,7 +52,7 @@ export function parseResponseToMolecule(response: PubChemResponse) {
 			...acc,
 			[representation]: getRepresentation(response, representation)
 		}),
-		{} as Record<RepresentationType, string>
+		{} as Molecule
 	);
 }
 
@@ -58,13 +62,10 @@ export function getUrlFromId(id: number) {
 }
 
 export function getSVGFromSmiles(smiles: string, width = 250, height = 128) {
-	return Molecule.fromSmiles(smiles).toSVG(width, height);
+	return MoleculeService.fromSmiles(smiles).toSVG(width, height);
 }
 
-export async function copyToClipboard(
-	molecule: Record<RepresentationType, string>,
-	representation: RepresentationType
-) {
+export async function copyToClipboard(molecule: Molecule, representation: RepresentationType) {
 	console.log(`Copied: ${representation} to clipboard`);
 	await navigator.clipboard.writeText(molecule[representation]);
 }

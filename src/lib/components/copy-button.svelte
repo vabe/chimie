@@ -8,6 +8,7 @@
 	export let disabled: boolean;
 	export let onClick: () => void;
 	export let tooltip: string;
+	export let size: 'default' | 'icon' | undefined = 'default';
 
 	onMount(() => {
 		return () => {
@@ -31,9 +32,16 @@
 			class="border-2 w-full"
 			disabled={disabled || isDisabled}
 			on:click={handleClick}
+			{size}
 		>
 			{#if isDisabled}
-				Copied
+				{#if size === 'icon'}
+					<span class="w-8"> ✅ </span>
+				{:else}
+					Copied
+				{/if}
+			{:else if size === 'icon'}
+				<span class="w-8"> <slot /></span>
 			{:else}
 				<slot />
 			{/if}
