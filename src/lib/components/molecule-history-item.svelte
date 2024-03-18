@@ -12,7 +12,7 @@
 
 {#if molecule && molecule.smiles}
 	<div class="border-2 p-2 flex justify-between items-center">
-		<div>{@html getSVGFromSmiles(molecule?.smiles, 100, 35)}</div>
+		<div>{@html getSVGFromSmiles(molecule?.smiles, 125, 35)}</div>
 		<div>
 			{#each representationTypes as representation}
 				<CopyButton
