@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"dev:browser": "nodemon --watch src --watch static --ext svelte,ts,js,css,html --exec \"vite build && node remove-inline-script.mjs\"",
+		"dev:ext": "nodemon --watch src --watch static --ext svelte,ts,js,css,html --exec \"vite build && node remove-inline-script.mjs\"",
 		"build": "vite build && node remove-inline-script.mjs",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
