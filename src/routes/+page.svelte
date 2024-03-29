@@ -39,7 +39,7 @@
 	onMount(async () => {
 		const { StorageHandler } = await import('$lib/storage-handler');
 		storageHandler = new StorageHandler<MoleculeStorage>('chrome');
-		moleculeHistory = await storageHandler.get('molecules');
+		moleculeHistory = await storageHandler.get('molecules') ?? [];
 	});
 
 	async function getMolecule() {
@@ -74,7 +74,6 @@
 	}
 
 	function handleClearHistory() {
-		console.log('Clearing history');
 		moleculeHistory = [];
 		moleculeHistory = moleculeHistory;
 	}
