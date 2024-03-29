@@ -30,6 +30,7 @@
 	let storageHandler: StorageHandler<MoleculeStorage>;
 	let activeTab: 'Copy' | 'History' = 'Copy';
 
+	// TODO: add support for other browsers
 	$: if (typeof chrome !== 'undefined') {
 		if (typeof moleculeHistory !== 'undefined') {
 			storageHandler.update('molecules', moleculeHistory);
@@ -48,6 +49,7 @@
 		return parseResponseToMolecule(molecule);
 	}
 
+	// TODO: Add local storage support
 	function getMoleculeFromLocal() {
 		console.log('Local molecule');
 	}
