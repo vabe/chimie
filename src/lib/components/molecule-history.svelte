@@ -14,7 +14,7 @@
 	class="p-4 flex flex-col gap-2 pt-2 pr-0 pb-0"
 	transition:fly={{ x: -10, duration: TRANSITION_DURATION }}
 >
-	<ScrollArea class="h-[230px] pr-4">
+	<ScrollArea class="h-[215px] pr-4">
 		<div class="flex flex-col gap-2">
 			{#if typeof moleculeHistory === 'undefined' || moleculeHistory.length === 0}
 				<div

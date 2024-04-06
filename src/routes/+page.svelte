@@ -101,7 +101,7 @@
 					<GenerateMoleculeButton {isLoading} />
 					<MoleculePreview {selectedMolecule} />
 				</Card.Header>
-				<Card.Content class="grid gap-4 p-4 pb-0">
+				<Card.Content class="grid gap-4 px-4 py-0">
 					<RepresentationsForm {selectedMolecule} />
 				</Card.Content>
 			</Card.Root>
