@@ -72,7 +72,6 @@ export function getSVGFromSmiles(
 }
 
 export async function copyToClipboard(molecule: Molecule, representation: RepresentationType) {
-	console.log('copiyng');
 	await navigator.clipboard.writeText(molecule[representation]);
 }
 
