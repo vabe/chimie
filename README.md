@@ -2,6 +2,10 @@
 
 Light-weight browser extension to copy random molecule data from trusted sources that can be used by scientists and enthusiasts alike.
 
+| ![chimie-light-preview](./.github/chimie-light.png) | ![chimie-dark-preview](./.github/chimie-dark.png) |
+| :-------------------------------------------------: | :-----------------------------------------------: |
+|                    Chimie light                     |                    Chimie Dark                    |
+
 ## ⚙️ Getting started
 
 The project requires that you have [Node](https://nodejs.org/en) running on your machine. It has been tested using `v20.9.0`.
