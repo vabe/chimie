@@ -82,7 +82,6 @@
 
 	async function saveMolecule(molecule: Molecule) {
 		const currentHistory = await storageHandler.get('molecules');
-		console.log(currentHistory);
 
 		if (currentHistory.length === 20) {
 			currentHistory.pop();
