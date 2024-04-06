@@ -122,7 +122,7 @@
 							{:else}
 								<div class="flex gap-1 items-center" in:fly={{ y: -10, duration: 300 }}>
 									<span> Generate molecule </span>
-									<div class="w-6 h-6 flex justify-center items-center">
+									<div class="w-6 h-6 flex justify-center items-center dark:fill-white">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											x="0px"

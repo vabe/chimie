@@ -55,4 +55,13 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	.dark {
+		svg {
+			circle,
+			line {
+				@apply stroke-white;
+			}
+		}
+	}
 }
